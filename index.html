@@ -1,0 +1,341 @@
+<!-- Сообщаем браузеру как стоит обрабатывать нашу страницу -->
+<!DOCTYPE html>
+<!-- Оболочка документа, указываем язык содержимого -->
+<html lang="en">
+<!-- Заголовок страницы, контейнер для других важных данных (не отображается) -->
+<head>
+    <!-- Заголовок страницы в браузере (название вкладки)-->
+    <title>Cootels</title>
+    <!-- Кодировка страницы -->
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <!-- Настраиваем Viewport (вид адаптивности верстки) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Подключаем шрифты через плагин Google Fonts--> 
+    <!--дописываем &display=swap, это важно для оптимизации--> 
+    <link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600,700&display=swap" rel="stylesheet">
+    <!--Подключаем Favicon-->
+    <link rel="shortcut icon" href="img/ico/favicon.ico">
+    <!--Подключаем слайдер Swiper-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <!--Подключаем CSS файл-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+    <body>
+        <div class="wrapper">
+            <header class="header">
+                <div class="header__container _container">
+                    <a class="header__logo" href="#" >Cootels</a>
+                    <div class="header__menu menu">
+                        <nav class="menu__body">
+                            <ul class="menu__list">
+                                <li class="menu__item"><a href="#" class="menu__link">Rooms</a></li>
+                                <li class="menu__item"><a href="#" class="menu__link">Reservation</a></li>
+                                <li class="menu__item"><a href="#" class="menu__link">Contacs</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <a class="header__button button" href="#">Get Started</a>
+                    <button class="menu__icon icon-menu" type="button" ><span></span></button>
+                </div>
+            </header>
+            <main class="page">
+                <div class="main-block__container _container">
+                    <div class="main-block__content">
+                        <div class="main-block__body">
+                            <h1 class="main-block__title">Nature, Warmth, and Beauty in One Space</h1>
+                            <p class="main-block__text text">
+                                One place to release all the stress, bring back happines, and get back to nature. We provide the best
+                                room and
+                                nature for you. Come visit us anytime you want.
+                            </p>
+                            <a class="main-block__button button" href="#">Reservation</a>
+                        </div>
+                        <div class="main-block__images">
+                            <div class="main-block__image main-block__image_left-image ">
+                                <img src="img/img/webp/house-part_1.webp" alt="house">
+                            </div>
+                            <div class="main-block__image main-block__image_central-image ">
+                                <img src="img/img/webp/house-part_2.webp" alt="house">
+                            </div>
+                            <div class="main-block__image main-block__image_right-image ">
+                                <img src="img/img/webp/house-part_3.webp" alt="house">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hotel__container _container">
+                    <div class="hotel__content">
+                        <div class="hotel__image">
+                            <img src="img/img/webp/hotel.webp" alt="hotel">
+                        </div>
+                        <div class="hotel__body">
+                            <h2 class="hotel__title title">Cozy and Down to Earth Cootage Hotel in Norway.</h2>
+                            <div class="hotel__paragraphs">
+                                <p class="hotel__text text">
+                                    Our Cootage Hotel is an intimate hideway concieved for dicerning travelers. It faces directly the unique and spectacular
+                                    panorama of the Hallerbos Jungle.
+                                </p>
+                                <p class="hotel__text text">
+                                    Cootels extends along a private, quiet, and beautiful nature. Stay away from crowd and enjoy the cozy and beauty with
+                                    us.
+                                </p>
+                            </div>
+                            <a class="hotel__button button" href="#">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="services__container _container">
+                    <div class="services__content service">
+                        <div class="service__item">
+                            <div class="service__body">
+                                <h2 class="service__title title">Cabin Activities</h2>
+                                <p class="service__text text">
+                                    Don’t worry to get bored easily in our cabin. We have so many cabin activities for you to do it alone or with group.
+                                    Maybe this is the best chance for you to make new friends or even a lover.
+                                </p>
+                            </div>
+                            <div class="service__image">
+                                <img src="img/img/webp/activities.webp" alt="Activities">
+                            </div>
+                        </div>
+                        <div class="service__item">
+                            <div class="service__body">
+                                <h2 class="service__title title">100% Organic Food</h2>
+                                <p class="service__text text">
+                                    We served 100% organic, low process and delicious food. We allow our guest to have breakfast or dinner request.What ever
+                                    made your taste buds happy.
+                                </p>
+                            </div>
+                            <div class="service__image">
+                                <img src="img/img/webp/food.webp" alt="Food">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rooms__container _container">
+                    <div class="rooms__content">
+                        <div class="rooms__body">
+                            <h2 class="rooms__title title">Many Rooms to Choose</h2>
+                            <p class="rooms__text text">There is a room for every needs. We have room for individuals until family size, we also
+                                have a cabin for more private experience
+                            </p>
+                            <a class="rooms__button button" href="#" >Explore more</a>
+                        </div>
+                        <div class="rooms__items">
+                            <div class="items__item item">
+                                <a href="#">
+                                    <div class="item__image _ibg">
+                                        <img src="img/img/webp/single_room.webp" alt="Single Room">
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <h3 class="item__title">Single Room</h3>
+                                </a>
+                                    <p class="item__text">Best for a brave lone wolf who need comfort and quiet quality time, but you still have a chance to
+                                        meet others.
+                                    </p>
+                                <a class="item__link" href="#" >Learn more</a>
+                            </div>
+                            <div class="items__item item">
+                                <a href="#">
+                                    <div class="item__image _ibg">
+                                        <img src="img/img/webp/double_room.webp" alt="Double Room">
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <h3 class="item__title">Double Room</h3>
+                                </a>
+                                <p class="item__text">Best for couple, seek happiness in intimacy without worry of being disturbed. Feel the whole world
+                                    just for you two
+                                </p>
+                                <a class="item__link" href="#" >Learn more</a>
+                            </div>
+                            <div class="items__item item">
+                                <a href="#">
+                                    <div class="item__image _ibg">
+                                        <img src="img/img/webp/cootage.webp" alt="Cootage">
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <h3 class="item__title">Cootage</h3>
+                                </a>
+                                <p class="item__text">Best for family or group. One cootage can fit up to 5 people. Made stronger bond with your family
+                                    or friends
+                                </p>
+                                <a class="item__link" href="#" >Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="howtoget__container _container">
+                    <div class="howtoget__content">
+                        <div class="howtoget__info info">
+                            <a class="info__start" href="#">Start your journey!</a>
+                            <h2 class="info__title title">How to Get My Room?</h2>
+                            <div class="info__text text">You can contact us by phone or email us. Easily tap the contact button below and it will take you to our contact point</div>
+                            <div class="info__buttons">
+                                <button class="info__button button">Contact us</button>
+                                <a class="info__link" href="#">Explore more room</a>
+                            </div>
+                        </div>
+                        <div class="howtoget__spoiler spoiler" data-spollers="768,min" >
+                            <div class="spoiler__item">
+                                <div class="spoiler__title" tabindex="-1" data-spoller>1. Choose a room and date</div>
+                                <div class="spoiler__text text">Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.</div>
+                            </div>
+                            <div class="spoiler__item">
+                                <div class="spoiler__title" tabindex="-1" data-spoller>2. Check for room availability</div>
+                                <div class="spoiler__text text">Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.</div>
+                            </div>
+                            <div class="spoiler__item">
+                                <div class="spoiler__title" tabindex="-1" data-spoller>3. Enjoy your room</div>
+                                <div class="spoiler__text text">Contact us via phone or email, ask for availability of you choice of room. We might offer you something exciting.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="customers__container _container">
+                    <div class="customers__content">
+                        <!--! Главный контейнер слайдера-->
+                        <div class="customers-slider swiper">
+                            <!--! Обязательная оболочка -->
+                            <div class="customers-slider__wrapper swiper-wrapper">
+                                <!--! Слайды -->
+                                <div class="customers-slider__slide swiper-slide">
+                                    <div class="customers-slider__body body-slider">
+                                        <div class="body-slider__title title">Hear From Our Happy Customers №1</div>
+                                        <div class="body-slider__image">
+                                            <img src="img/avatar/avatar_1.png" alt="Kirana Dunham">
+                                        </div>
+                                        <div class="body-slider__text text">“Great service, great food, great people. The scenery is also beautiful, you can do so
+                                            much activity even with your famility. Worth every penny! you should come and see for your self. 5 out of 5! the
+                                            waffle is great!”</div>
+                                        <div class="body-slider__name">Kirana Dunham</div>
+                                    </div>
+                                </div>
+                                <div class="customers-slider__slide swiper-slide">
+                                    <div class="customers-slider__body body-slider">
+                                        <div class="body-slider__title title">Hear From Our Happy Customers №2</div>
+                                        <div class="body-slider__image">
+                                            <img src="img/avatar/avatar_1.png" alt="Kirana Dunham">
+                                        </div>
+                                        <div class="body-slider__text text">“Great service, great food, great people. The scenery is also beautiful, you can do so
+                                            much activity even with your famility.”</div>
+                                        <div class="body-slider__name">Kirana Dunham</div>
+                                    </div>
+                                </div>
+                                <div class="customers-slider__slide swiper-slide">
+                                    <div class="customers-slider__body body-slider">
+                                        <div class="body-slider__title title">Hear From Our Happy Customers №3</div>
+                                        <div class="body-slider__image">
+                                            <img src="img/avatar/avatar_1.png" alt="Kirana Dunham">
+                                        </div>
+                                        <div class="body-slider__text text">“Great service, great food, great people. The scenery is also beautiful, you can do so
+                                            much activity even with your famility. Worth every penny! you should come and see for your self. 5 out of 5! the
+                                            waffle is great!”“Great service, great food, great people. The scenery is also beautiful, you can do so
+                                            much activity even with your famility. Worth every penny! you should come and see for your self. 5 out of 5! the
+                                            waffle is great!”“Great service, great food, great people. The scenery is also beautiful, you can do so
+                                            much activity even with your famility. Worth every penny! you should come and see for your self. 5 out of 5! the
+                                            waffle is great!”</div>
+                                        <div class="body-slider__name">Kirana Dunham</div>
+                                    </div>
+                                </div>
+                                <div class="customers-slider__slide swiper-slide">
+                                    <div class="customers-slider__body body-slider">
+                                        <div class="body-slider__title title">Hear From Our Happy Customers №4</div>
+                                        <div class="body-slider__image">
+                                            <img src="img/avatar/avatar_1.png" alt="Kirana Dunham">
+                                        </div>
+                                        <div class="body-slider__text text">“Great service, great food, great people. The scenery is also beautiful, you can do so
+                                            much activity even with your famility. Worth every penny! you should come and see for your self. 5 out of 5! the
+                                            waffle is great!”</div>
+                                        <div class="body-slider__name">Kirana Dunham</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--! Добавляем если нам нужна пагинация -->
+                            <div class="swiper-pagination"></div>
+                            <!--! Добавляем если нам нужны стрелки управления -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            <!--! Добавляем если нам нужна полоса прокрутки -->
+                            <!-- <div class="swiper-scrollbar"></div> -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer">
+                <div class="footer__container _container">
+                    <div class="footer__columns">
+                        <div class="footer__social">
+                            <div class="social__title">Cootels</div>
+                            <div class="social__text">Your Best Private Hideway From Crowd. Back to Nature.</div>
+                            <div class="social__icons icons">
+                                <div class="icons__icon">
+                                    <a class="icons__link" href="https://twitter.com/" target="_blank">
+                                        <img class="icons__logo" src="img/ico/twitter-logo.svg" alt="Twitter">
+                                    </a>
+                                </div>
+                                <div class="icons__icon">
+                                    <a class="icons__link" href="https://www.instagram.com/" target="_blank">
+                                        <img class="icons__logo" src="img/ico/instagram-logo.svg" alt="Instagram">
+                                    </a>
+                                </div>
+                                <div class="icons__icon">
+                                    <a class="icons__link" href="https://www.facebook.com/" target="_blank">
+                                        <img class="icons__logo" src="img/ico/facebook-logo.svg" alt="Facebook">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column column">
+                            <div class="column__label">Rooms</div>
+                            <ul class="column__list">
+                                <li class="column__item">
+                                    <a class="column__link" href="">Single Room</a>
+                                </li>
+                                <li class="column__item">
+                                    <a class="column__link" href="">Double Room</a>
+                                </li>
+                                <li class="column__item">
+                                    <a class="column__link" href="">Cabin</a>
+                                </li>
+                                <li class="column__item">
+                                    <a class="column__link" href="">Custom Room</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer__column column">
+                            <div class="column__label">Reservation</div>
+                            <ul class="column__list">
+                                <li class="column__item">
+                                    <a class="column__link" href="">See the Steps</a>
+                                </li>
+                                <li class="column__item">
+                                    <a class="column__link" href="">Best Time</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer__column column">
+                            <div class="column__label">Contact</div>
+                            <ul class="column__list">
+                                <li class="column__item">
+                                    <a class="column__link" href="">Our Number</a>
+                                </li>
+                                <li class="column__item">
+                                    <a class="column__link" href="">Our Email</a>
+                                </li>
+                                <li class="column__item">
+                                    <a class="column__link" href="">Our Location</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>

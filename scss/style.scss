@@ -1,0 +1,1076 @@
+// Подключаем стили ===============================================================================
+@import "_nulstyle";
+@import "_mixins";
+//=================================================================================================
+
+
+// CANVAS (Полотно) ===============================================================================
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+._container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; //отступы от прилипания!
+    box-sizing: content-box; //позволяет нам компенсровать паддинги 15px от краев не меняя значение max-width
+}
+body {
+    font-family: "Inter";
+    font-size: 18px;
+}
+body._lock {
+    overflow: hidden;
+}
+._ibg {
+    position: relative;
+}
+._ibg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+//=================================================================================================
+
+
+// ОБЩИЕ КЛАССЫ ===================================================================================
+.button {
+    display: inline-flex;
+    border-radius: 4px;
+    background-color: #0E1734;
+    color: #FFFFFF;
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: calc(19 / 16 * 100%);
+    transition: all 0.4s ease 0s;
+}
+.text {
+    font-weight: 400;
+    @include adaptiv-value_old("font-size", 18, 14, 1);
+    line-height: calc(27 / 18 * 100%);
+    color: #848FAC;
+}
+.title {
+    font-family: 'Montserrat';
+    @include adaptiv-value_old("font-size", 36, 20, 1);
+    font-weight: 600;
+    line-height: calc(54 / 36 * 100%);
+    color: #192252;
+}
+//=================================================================================================
+
+
+// HEADER =========================================================================================
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba($color: #ffffff, $alpha: 0.95);
+    &__container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        @include adaptiv-value_old("min-height", 120, 80, 1); //адаптив до 767px, дальше фиксированный для корректного взаимодействия с плашкой в бургре
+        // не обязалетьные свойства. добавил для большей нажедности шапки:
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    @media (max-width: 767px) {
+        .header__container {
+            min-height: 80px;
+        }
+    }
+
+    &__logo {
+        font-family: Montserrat;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: calc(39 / 32 * 100%);
+        color: #192252;
+        position: relative;
+        z-index: 5;
+    }
+
+    &__menu {
+        flex: 1 1 auto;
+        //flex: 1 1 auto; //!==================================
+    }
+
+    &__button {
+        padding: 14px 16px;
+        min-width: 121px;
+        min-height: 47px;
+        position: relative;
+        z-index: 5;
+        margin-left: 15px;
+    }
+}
+@media (max-width: 375px) {
+    .header__logo {
+        font-size: 28px;
+    }
+    .header__button {
+        padding: 14px 14px;
+        margin-left: 15px;
+    }
+}
+.menu {
+
+    &__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: calc(19 / 16 * 100%);
+        color: #192252;
+        display: flex;
+        margin: 0 16px;
+    }
+
+    &__link {
+        color: inherit;
+        padding: 5px 0;
+        position: relative;//!
+    }
+}
+// БУРГЕР =======================================
+.icon-menu {
+    display: none; //скрываем меню
+}
+@media (max-width: 767px) {
+    .icon-menu {
+        display: block; //отображаем меню
+        z-index: 5;
+        position: relative; //позиционирование относительно места в коде
+        width: 30px;
+        height: 18px;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+
+    .menu__icon span,
+    .menu__icon::before,
+    .menu__icon::after {
+        position: absolute;
+        left: 0;
+        height: 10%; //от родителя
+        width: 100%; //от родителя
+        transition: all 0.3s ease 0s;
+        background-color: #0E1734;
+    }
+    .menu__icon::before,
+    .menu__icon::after  {
+        content: "";
+    }
+
+    .menu__icon::before {
+        top: 0;
+    }
+
+    .menu__icon::after {
+        bottom: 0;
+    }
+    .menu__icon span {
+        top: 50%;
+        transform: scale(1) translate(0px, -50%);
+    }
+    //===анимируем кнопку бургера=====================================
+    .menu__icon._active span {
+        transform: scale(0) translate(0px, -50%);
+    }
+    .menu__icon._active::before {
+        top: 50%;
+        transform: rotate(-45deg) translate(0px, -50%);
+    }
+    .menu__icon._active::after {
+        top: 50%;
+        transform: rotate(45deg) translate(0px, 50%);
+    }
+    //================================================================
+
+    .menu__body {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #ffffff, $alpha: 0.95);
+        transition: left 0.3s ease 0s;
+        padding: 100px 0 0 0;
+        overflow: auto; //для скрола в бургере
+    }
+    .menu__body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 80px;
+        transition: background-color 2s ease 0s; //настройка исчезновения плашки
+        z-index: 2; //чтобы плашка накрывала пункты меню при скролле
+    }
+    .menu__body._active {
+        left: 0%;
+    }
+    .menu__body._active::before {
+        transition: background-color 0s ease 0s; //настройка появления плашки
+        background-color: rgba($color: #ffffff, $alpha: 1.0);
+        box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+    }
+    .menu__list {
+        flex-direction: column;
+    }
+
+    .menu__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .menu__item {
+        font-size: 24px;
+        margin: 0 0 15px 0;
+    }
+}
+// Настраиваем меню бургер ======================
+body._pc {
+    .button:hover {
+        outline:1px solid #0E1734; // НЕ использую border потому что он сжимает блок и текст кнопки ломается (бордер работает внутрь блока)
+        background-color: #ffffff;
+        color: #0E1734;
+    }
+    .button:active {
+        background-color: #dde6ff;
+    }
+    .menu__link::before {//!
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #192252;
+        transition: all 0.2s ease 0s;
+        transform: scaleX(0);
+    }
+    .menu__link:hover::before {//!
+        transform: scaleX(1);
+    }
+    .item__image:hover {
+        opacity: 80%;
+    }
+    .item__image img:hover {
+        transform: scale(1.05);
+    }
+    .item__title:hover {
+        color: #848FAC;
+    }
+    .item__link:hover::after {
+        transition: left 0.1s ease 0s;
+        left: 5px;
+        }
+    .info__start:hover {
+        text-decoration: underline;
+    }
+    .info__link:hover {
+        text-decoration: underline;
+    }
+    .icons__icon:hover {
+        outline: #ffffff solid 1px;
+        border-radius: 10%;
+    }
+    .column__link:hover {
+        text-decoration: underline;
+    }
+}
+body._touch {
+    .button:active {
+        outline:1px solid #0E1734; // НЕ использую border потому что он сжимает блок и текст кнопки ломается (бордер работает внутрь блока)
+        background-color: #ffffff;
+        color: #0E1734;
+    }
+    .info__start {
+        text-decoration: underline;
+    }
+    .info__link {
+        text-decoration: underline;
+    }
+    .column__link {
+        text-decoration: underline;
+    }
+}
+//===============================================
+//=================================================================================================
+
+
+
+// MAIN ===========================================================================================
+// main-block ===================================
+.main-block {
+
+		&__container {
+            @include adaptiv-value_old("margin-top", 120, 40, 1);
+		}
+
+		&__content {
+            display: flex;
+            @include adaptiv-value_old("padding-top", 80, 40, 1);
+            @include adaptiv-value_old("padding-bottom", 80, 40, 1);
+		}
+
+		&__body {
+            display: flex;
+            flex: 0 1 50%;
+            //flex: 0 1 588px;
+            flex-direction: column;
+            margin: 0 15px 0 0;
+		}
+
+		&__title {
+            font-family: "Montserrat";
+            @include adaptiv-value_old("font-size", 48, 18, 1);
+            font-weight: 600;
+            line-height: calc(72 / 48 * 100%);
+            color: #192252;
+            @include adaptiv-value_old("margin-top", 135, 30, 1);
+            @include adaptiv-value_old("margin-bottom", 24, 12, 1);
+		}
+
+		&__text {
+            @include adaptiv-value_old("margin-bottom", 32, 10, 1);
+            @include adaptiv-value_old("max-width", 485, 200, 1);
+		}
+
+		&__button {
+            padding: 16px 32px;
+            max-width: 156px;
+            max-height: 51px;
+		}
+
+		&__images {
+            display: flex;
+            flex: 0 1 50%;
+		}
+
+		&__image {
+			&_central-image {
+                @include adaptiv-value_old("padding-top", 81, 20, 1);
+                @include adaptiv-value_old("padding-bottom", 16, 8, 1);
+			}
+		}
+
+		&__image:not(:last-child) {
+            @include adaptiv-value_old("margin-right", 24, 8, 1);
+		}
+
+		&__image img {
+            box-shadow: rgba(46, 61, 77, 0.2) 0px 10px 30px -20px;
+            object-fit: contain;
+            object-position: center;
+            width: 100%;
+            border-radius: 4px;
+		}
+}
+@media (max-width: 767px) {
+    .main-block__content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-block__body {
+        max-width: 767px;
+        align-items: center;
+        margin-right: 0;
+        @include adaptiv-value_old("margin-bottom", 60, 25, 1);
+    }
+    .main-block__title {
+        text-align: center;
+        max-width: 767px;
+        @include adaptiv-value_old("margin-top", 80, 60, 1);
+        @include adaptiv-value_old("margin-bottom", 24, 10, 1);
+    }
+    .main-block__text {
+        max-width: 767px;
+        text-align: center;
+        @include adaptiv-value_old("margin-bottom", 32, 16, 1);
+    }
+
+    .main-block__images {
+        flex: 0 1 100%;
+    }
+
+    .main-block__image_central-image {
+        @include adaptiv-value_old("padding-top", 120, 65, 1);
+        @include adaptiv-value_old("padding-bottom", 16, 8, 1);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .main-block__image_central-image {
+        @include adaptiv-value_old("padding-top", 190, 45, 1);
+        @include adaptiv-value_old("padding-bottom", 16, 8, 1);
+    }
+}
+//===============================================
+
+// hotel ========================================
+.hotel {
+
+    &__content {
+        display: flex;
+        @include adaptiv-value_old("padding-top", 80, 5, 1);
+        @include adaptiv-value_old("padding-bottom", 80, 25, 1);
+    }
+
+    &__image {
+        @include adaptiv-value_old("margin-right", 126, -80, 1);
+        flex: 0 1 384px;
+    }
+    &__image img {
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+    }
+
+    &__body {
+        flex: 0 1 690px;
+    }
+
+    &__title {
+        @include adaptiv-value_old("margin-top", 105, -30, 1);
+        @include adaptiv-value_old("margin-bottom", 24, 5, 1);
+    }
+
+    &__paragraphs {
+        @include adaptiv-value_old("margin-bottom", 32, 5, 1);
+        max-width: 584px;
+    }
+
+    &__text:not(:last-child) {
+        @include adaptiv-value_old("margin-bottom", 16, 5, 1);
+    }
+
+    &__button {
+        padding: 16px 32px;
+    }
+}
+@media (max-width: 767px) {
+
+    .hotel__content {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        @include adaptiv-value_old("padding-top", 80, 40, 1);
+        @include adaptiv-value_old("padding-bottom", 80, 40, 1);
+    }
+
+    .hotel__image {
+        margin-right: 0;
+        flex: 0 1 auto;
+    }
+
+    .hotel__image img {
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+    }
+
+    .hotel__body {
+        padding-bottom: 5px;
+        flex: 0 0 auto;
+        text-align: center;
+    }
+
+    .hotel__title {
+        max-width: 760px;
+    }
+
+    .hotel__paragraphs {
+        max-width: 760px;
+    }
+
+    .hotel__button {
+        @include adaptiv-value_old("margin-bottom", 24, 20, 1);
+    }
+}
+//===============================================
+
+// services =====================================
+.services {
+
+    &__content {
+        @include adaptiv-value_old("padding-top", 80, 40, 1);
+        @include adaptiv-value_old("padding-bottom", 80, 40, 1);
+    }
+}
+.service {
+    &__item {
+        display: flex;
+    }
+    &__item:not(:last-child) {
+        margin-bottom: 32px;
+    }
+    &__item:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    @media (min-width: 768px) {
+        .service__body {
+            flex: 0 1 584px;
+            @include adaptiv-value_old("padding-top", 113, 95, 1);
+        }
+        .service__item > div {
+            @include adaptiv-value_old("margin-right", 126, -80, 1);
+        }
+    }
+
+    &__image {
+        flex: 0 1 384px;
+    }
+    &__image img {
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+    }
+
+}
+@media (max-width: 767px) {
+
+    .service {
+    
+        .service__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .service__item:not(:last-child) {
+            margin-bottom: 42px;
+        }
+    
+        .service__body {
+            @include adaptiv-value_old("margin-bottom", 28, 14, 1);
+        }
+    
+        .service__image {
+            flex: 0 1 auto;
+        }
+        .service__image img {
+            object-fit: contain;
+            object-position: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+        }
+    }
+}
+//===============================================
+
+// rooms ========================================
+.rooms {
+
+    // .rooms__content
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @include adaptiv-value_old("padding-top", 80, 10, 1);
+        @include adaptiv-value_old("padding-bottom", 80, 10, 1);
+    }
+
+    // .rooms__body
+    &__body {
+        max-width: 588px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include adaptiv-value_old("margin-bottom", 88, -50, 1);
+    }
+
+    // .rooms__title
+    &__title {
+        @include adaptiv-value_old("margin-bottom", 24, 12, 1);
+    }
+
+    // .rooms__text
+    &__text {
+        @include adaptiv-value_old("margin-bottom", 32, 14, 1);
+    }
+
+    // .rooms__button
+    &__button {
+        padding: 16px 32px;
+        max-width: 165px;
+        max-height: 51px;
+    }
+
+    // .rooms__items
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        @include adaptiv-value_old("margin-left", -12, -3, 1);
+        @include adaptiv-value_old("margin-right", -12, -3, 1);
+    }
+}
+.item {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 33.333%;
+    @include adaptiv-value_old("padding-left", 12, 3, 1);
+    @include adaptiv-value_old("padding-right", 12, 3, 1);
+    // .item__image
+    &__image {
+        padding: 127% 0 0 0;
+        @include adaptiv-value_old("margin-bottom", 32, -14, 1);
+        border-radius: 4px;
+        overflow: hidden;
+        transition: all 0.3s ease 0s;
+    }
+    &__image img {
+        border-radius: 4px;
+        transition: all 0.3s ease 0s;
+    }
+    // .item__title
+    &__title {
+        font-family: 'Montserrat';
+        //font-size: 24px;
+        @include adaptiv-value_old("font-size", 24, 20, 1);
+        font-weight: 600;
+        line-height: calc(36 / 24 * 100%);
+        color: #000000;
+        @include adaptiv-value_old("margin-bottom", 16, -8, 1);
+        transition: color 0.3s ease 0s;
+    }
+    // .item__text
+    &__text {
+        flex: 1 1 auto;
+        @include adaptiv-value_old("font-size", 18, 14, 1);
+        line-height: calc(27 / 18 * 100%);
+        color: #848FAC;
+        @include adaptiv-value_old("margin-bottom", 32, -18, 1);
+    }
+    // .item__link
+    &__link {
+        font-size: 18px;
+        line-height: calc(27 / 18 * 100%);
+        color: #424F7B;
+    }
+    &__link::after {
+        content: "";
+        background-image: url("../img/ico/arrow-right.svg");
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        position: relative;
+        top: 5px;
+        left: 0;
+        transition: left 0.1s ease 0s;
+        margin: 0 0 0 12px;
+    }
+}
+@media (max-width: 767px) {
+    .item {
+        flex: 0 1 50%;
+        @include adaptiv-value_old("margin-bottom", 80, 24, 1);
+    }
+    .rooms__content {
+        padding-bottom: 0;
+    }
+    .rooms__body {
+        @include adaptiv-value_old("margin-bottom", 40, 20, 1);
+    }
+
+    .item__image {
+        @include adaptiv-value_old("margin-bottom", 24, 0, 1);
+    }
+
+    .item__title {
+        @include adaptiv-value_old("margin-bottom", 16, 0, 1);
+    }
+    .item__text {
+        @include adaptiv-value_old("margin-bottom", 16, 0, 1);
+    }
+}
+@media (max-width: 480px) {
+    .item {
+        flex: 0 1 100%;
+    }
+}
+//===============================================
+
+// howtoget =====================================
+.howtoget {
+    // .howtoget__container
+    &__container {
+        @include adaptiv-value_old("margin-top", 80, 40, 1);
+        @include adaptiv-value_old("margin-bottom", 160, 40, 1);
+    }
+    // .howtoget__content
+    &__content {
+        display: flex;
+    }
+    // .howtoget__info
+    &__info {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        flex: 0 1 50%;
+    }
+    // .howtoget__spoiler
+    &__spoiler {
+        flex: 0 1 50%;
+    }
+}
+.info {
+
+    // .info__start
+    &__start {
+        width: max-content; // ширина блока (области нажатия) равна ширине контента.(тестирую)
+        font-weight: 500;
+        color: #424F7B;
+        line-height: calc(24 / 16 * 100%);
+        @include adaptiv-value_old("margin-bottom", 12, 8, 1);
+    }
+    // .info__title
+    &__title {
+        @include adaptiv-value_old("margin-bottom", 24, 10, 1);
+    }
+    // .info__text
+    &__text {
+        @include adaptiv-value_old("margin-bottom", 32, 24, 1);
+    }
+    // .info__button
+    &__button {
+        padding: 16px 32px;
+        max-width: 148px;
+        max-height: 51px;
+        margin-right: 24px;
+    }
+    // .info__link
+    &__link {
+        font-weight: 500;
+        line-height: calc(19 / 16 * 100%);
+        color: #0E1734;
+    }
+}
+.spoiler {
+
+    &__item:not(:last-child) {
+        margin-bottom: 24px;
+    }
+    // .spoiler__title
+    &__title {
+        font-family: "Montserrat";
+        @include adaptiv-value_old("font-size", 24, 16, 1);
+        font-weight: 600;
+        line-height: calc(36 / 24 * 100%);
+        color: #424F7B;
+        text-align: left;
+        position: relative;
+        cursor: pointer;
+        padding-right: 50px; //что бы иконка не наезжала на заголовок
+        margin-bottom: 18px;
+        @include adaptiv-value_old("margin-bottom", 18, 7, 0);
+    }
+}
+@media (min-width: 768px) {
+    .spoiler__text {
+        max-width: 550px;
+    }
+}
+@media (min-width: 768px) {
+    .howtoget__spoiler .spoiler__title::before,
+    .howtoget__spoiler .spoiler__title::after {
+        content: "";
+        width: 20px;
+        height: 3px;
+        background-color: #FF620A;
+        position: absolute; // position: relative - ставим на .spoiler__title
+        right: 10px;
+        top: 13px;
+        transition: transform 0.3s ease 0s;
+    }
+    .howtoget__spoiler._init .spoiler__title {
+        min-width: 50%;
+    }
+    .spoiler._init .spoiler__title::after {
+        transform: rotate(-45deg);
+        right: 10px;
+    }
+    .spoiler._init .spoiler__title::before {
+        transform: rotate(45deg);
+        right: 23px;
+    }
+    .spoiler._init .spoiler__title._active::after {
+        //transform: rotate(0deg);
+        transform: rotate(45deg);
+    }
+    .spoiler._init .spoiler__title._active::before {
+        //transform: rotate(0deg);
+        transform: rotate(-45deg);
+    }
+}
+@media (max-width: 767px) {
+    .howtoget__content {
+        flex-direction: column;
+    }
+    .howtoget__info {
+        align-items: center;
+        margin-right: 0;
+        margin-bottom: 50px;
+    }
+    .info__buttons {
+        display: flex;
+        flex-direction: column;
+    }
+    .info__button {
+        margin: 0 auto;
+        margin-bottom: 14px;
+    }
+    .info__link {
+        margin: 0 auto;
+    }
+}
+//===============================================
+
+// customers (Slider)============================
+/*
+1.
+Если слайдер размещен внутри Flex-элемента то этому Flex-элемента нужно добавить min-width: 0;
+После этого принудительно обновить страницу сайта, это уберет баги которые возникают в работей слайдера который находится внутри Flex-элемента.
+2.
+Проблема которая возникает если поместить слайдер в изначально скрытый объект (например в один из табов).
+Решение в разделе "Обновление слайдера"
+*/
+.customers {
+
+    // .customers__content
+    &__content {
+        @include adaptiv-value_old("margin-bottom", 80, 20, 1);
+    }
+}
+.customers-slider {
+
+    // .customers-slider__body
+    &__body {
+        cursor: pointer;
+        max-width: 794px;
+        //height: 100%; //включить если нужно прижать body-slider__name к низу блока
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include adaptiv-value_old("margin-bottom", 24, 14, 1);
+    }
+}
+.body-slider {
+    // .body-slider__title
+    &__title {
+        text-align: center;
+        @include adaptiv-value_old("margin-bottom", 62, 20, 1);
+    }
+
+    // .body-slider__image
+    &__image {
+        @include adaptiv-value_old("margin-bottom", 44, 30, 1);
+    }
+
+    // .body-slider__text
+    &__text {
+        text-align: center;
+        @include adaptiv-value_old("margin-bottom", 40, 20, 1);
+        //flex: 1 1 auto; //включить если нужно прижать body-slider__name у низу блока
+    }
+
+    // .body-slider__name
+    &__name {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: calc(30 / 20 * 100%);
+        color: #192252;
+        text-align: center;
+        @include adaptiv-value_old("margin-bottom", 24, 14, 1);
+    }
+}
+.swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+}
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #FAB047
+}
+.swiper-button-prev::after {
+    color: #FF620A;
+    @include adaptiv-value_old("font-size", 48, 38, 1);
+}
+.swiper-button-next::after {
+    color: #FF620A;
+    @include adaptiv-value_old("font-size", 48, 38, 1);
+}
+@media (max-width: 920px) {
+    .swiper-button-next,.swiper-button-prev {
+        top: 33%;
+    }
+}
+//===============================================
+//=================================================================================================
+
+
+// FOOTER =========================================================================================
+.footer {
+    background-color: #0B265A;
+    color: #FFFFFF;
+
+    // .footer__columns
+    &__columns {
+        display: flex;
+        justify-content: space-between;
+        @include adaptiv-value_old("padding-top", 120, 0, 1);
+        @include adaptiv-value_old("padding-bottom", 120, 0, 1);
+    }
+
+    // .footer__social
+    &__social {
+        max-width: 186px;
+        @include adaptiv-value_old("margin-right", 400, 0, 1);
+    }
+
+    // .footer__column
+    &__column {
+        margin-right: 10px;
+    }
+}
+.social {
+
+    // .social__title
+    &__title {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 32px;
+        line-height: calc(39 / 32 * 100%);
+        margin-bottom: 13px;
+    }
+
+    // .social__text
+    &__text {
+        font-size: 16px;
+        line-height: calc(28 / 16 * 100%);
+        color: #D9DBDE;
+        margin-bottom: 36px;
+    }
+
+    // .social__icons
+    &__icons {
+        display: flex;
+    }
+}
+.icons {
+
+    // .icons__icon
+    &__icon {
+        margin-right: 24px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.column {
+
+    // .column__label
+    &__label {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: calc(19 / 16 * 100%);
+        margin-bottom: 24px;
+    }
+    &__item:not(:last-child) {
+        margin-bottom: 24px;
+    }
+
+    // .column__link
+    &__link {
+        font-size: 16px;
+        line-height: calc(19 / 16 * 100%);
+        color: #D9DBDE;
+    }
+}
+@media (max-width: 767px) {
+    .footer__social {
+        margin-right: 30px;
+    }
+
+    .footer__column {
+        margin-right: 30px;
+    }
+
+    .footer__columns {
+        flex-wrap: wrap;
+        @include adaptiv-value_old("padding-top", 60, 24, 1);
+        @include adaptiv-value_old("padding-bottom", 60, 24, 1);
+    }
+
+    .social__title {
+        @include adaptiv-value_old("font-size", 32, 16, 1);
+    }
+    .column__item {
+        @include adaptiv-value_old("margin-bottom", 24, 14, 1);
+    }
+    .social__text {
+        @include adaptiv-value_old("font-size", 16, 14, 1);
+        @include adaptiv-value_old("margin-bottom", 36, 14, 1);
+    }
+
+    .column__label {
+        @include adaptiv-value_old("font-size", 16, 14, 1);
+        @include adaptiv-value_old("margin-bottom", 24, 14, 1);
+    }
+
+    .column__link {
+        @include adaptiv-value_old("font-size", 16, 14, 1);
+    }
+        // 
+        .social__icons {
+            margin-bottom: 30px;
+        }
+}
+@media (max-width: 767px) {
+    .footer__social {
+        max-width: 150px;
+        margin-right: 10px;
+        margin-bottom: 25px;
+    }
+}
+//=================================================================================================
+
+//=================================================================================================
+//? как добавить фон стрелочкам спойлеров (аккордеон)?
+//? как изменить размер шапки при скроле?
+//? как убрать прыжок окна при закрытии или открытии бургера (когда справа пропадает скроллбар)?
+//=================================================================================================
